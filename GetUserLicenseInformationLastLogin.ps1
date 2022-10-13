@@ -81,7 +81,7 @@ try {
 }finally {
     if (Test-Path $LicenseDetailFile){
         if($null -ne (Get-content $LicenseDetailFile)){
-            Write-Host "`n`tgetting the csv file content "
+            Write-Host "`n`tgetting the csv file content " -ForegroundColor Yellow
             $getlicenseName = Import-csv $LicenseDetailFile
             $getlicenseNameUnique = $getlicenseName | Sort-Object String_Id -Unique
         }else {
