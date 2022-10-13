@@ -42,4 +42,4 @@ Run powershell make sure you install both msonline and exchangeonlinemanagement 
 ![](.\Sample.png)
 ![](.\Sample2.png)
 
-<img src="Sample2.png"  style="float: left; margin-right: 10px;" />
+<img src=".\Sample2.png"  style="float: left; margin-right: 10px;" />
