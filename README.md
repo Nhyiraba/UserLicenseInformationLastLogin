@@ -35,3 +35,9 @@ Run powershell make sure you install both msonline and exchangeonlinemanagement 
 #### if ReportDestinationFolderPath not specified the current working directory where script is located will be used
     .\GetUserLicenseInformationLastLogin.ps1 -RecipientTypes RoomMailbox, UserMailbox,SharedMailbox -ReportTypeSelection LastSignInDetail -ReportDestinationFolderPath "Enter Your Preferre Path"
 
+
+### Test Results for room mailbox
+    .\GetUserLicenseInformationLastLogin.ps1 -RecipientTypes RoomMailbox
+    
+![](.\Sample.png)
+![](.\Sample2.png)
