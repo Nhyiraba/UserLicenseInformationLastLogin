@@ -100,7 +100,7 @@ $mbx | ForEach-Object {
     #assign object
     $UserObject = $_ 
     $itemCount += 1
-    Write-Progress -Activity "Retrieving object properties from the server $itemCount of $($mbx.count)" -Status " Currently Processing: $($UserObject.DisplayName)" -PercentComplete ((($itemCount) / $mbx.count) * 100) -
+    Write-Progress -Activity "Retrieving object properties from the server $itemCount of $($mbx.count)" -Status " Currently Processing: $($UserObject.DisplayName)" -PercentComplete ((($itemCount) / $mbx.count) * 100)
 
     #getting login information for the each
     $mbxStat = Get-MailboxStatistics  -Identity $UserObject.UserPrincipalName
