@@ -21,7 +21,7 @@ param (
 
 
 #checking connection status for msol and exchangeonline
-if ($null -eq (Get-OrganizationConfig -errorAction SilentlyContinue)) {
+if ($null -eq (Get-Command Get-OrganizationConfig -errorAction SilentlyContinue)) {
 
     if ($null -ne (Get-Command Connect-ExchangeOnline -errorAction SilentlyContinue)) {
         Write-Host "Now attempting to connect exchangeonline..........."
@@ -61,6 +61,7 @@ $Results = @()
 $LicenseDetailFile = ".\LicenseFriendlyNames.csv"
 
 #get object depending on the the select type
+Write-Host "`n`tGetting all the selected mailbox information" -ForegroundColor Yellow
 if(-not($RecipientTypes) -and -not($AllRecipientTypes.IsPresent)) {
     $mbx = Get-Mailbox -ResultSize Unlimited | Where-Object {$_.RecipientTypeDetails -ne "DiscoveryMailbox"}
 }elseif($AllRecipientTypes){
@@ -71,6 +72,7 @@ if(-not($RecipientTypes) -and -not($AllRecipientTypes.IsPresent)) {
 }
 
 #geting licese frindly names
+Write-Host "`n`tGetting all the Microsoft License name and identities information" -ForegroundColor Yellow
 $LicenseDetailFile = ".\LicenseFriendlyNames.csv"
 try {
     Invoke-RestMethod -Uri  "https://download.microsoft.com/download/e/3/e/e3e9faf2-f28b-490a-9ada-c6089a1fc5b0/Product%20names%20and%20service%20plan%20identifiers%20for%20licensing.csv" -OutFile ".\LicenseFriendlyNames.csv"
@@ -79,7 +81,7 @@ try {
 }finally {
     if (Test-Path $LicenseDetailFile){
         if($null -ne (Get-content $LicenseDetailFile)){
-            Write-Host "getting the csv file content "
+            Write-Host "`n`tgetting the csv file content "
             $getlicenseName = Import-csv $LicenseDetailFile
             $getlicenseNameUnique = $getlicenseName | Sort-Object String_Id -Unique
         }else {
@@ -92,11 +94,13 @@ try {
 }
 
 
-
+Write-Host "`n`tGetting all the selected object properties information" -ForegroundColor Yellow
+$itemCount = 0
 $mbx | ForEach-Object {
-
     #assign object
     $UserObject = $_ 
+    $itemCount += 1
+    Write-Progress -Activity "Retrieving object properties from the server $itemCount of $($mbx.count)" -Status " Currently Processing: $($UserObject.DisplayName)" -PercentComplete ((($itemCount) / $mbx.count) * 100) -
 
     #getting login information for the each
     $mbxStat = Get-MailboxStatistics  -Identity $UserObject.UserPrincipalName
