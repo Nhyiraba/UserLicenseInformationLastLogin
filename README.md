@@ -39,7 +39,5 @@ Run powershell make sure you install both msonline and exchangeonlinemanagement 
 ### Test Results for room mailbox
     .\GetUserLicenseInformationLastLogin.ps1 -RecipientTypes RoomMailbox
     
-![](.\Sample.png)
-![](.\Sample2.png)
-
-<img src=".\Sample2.png"  style="float: left; margin-right: 10px;" />
+![Sample1](/Sample.png)
+![Sample2](/Sample2.png)
