@@ -41,4 +41,4 @@ Run powershell make sure you install both msonline and exchangeonlinemanagement 
     
 ![Sample1](/Sample.png)
 
-![Sample2](/Sample2.png)
+![Sample2](/sample2.png)
