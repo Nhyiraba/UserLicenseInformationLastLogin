@@ -153,14 +153,15 @@ if ((Test-Path $ReportDestinationFolderPath) -eq $false) {
     $ReportDestinationFolderPath = '.'
 }
 
+$ExportDate = Get-Date -Format "MM-dd-yyyy HH-mm"
 Write-Host "Content will be saved to the current scirpt location or the specified"
 
 if ($ReportTypeSelection -eq 'AssignedLicenses') {
-    $Results | Select-Object DisplayName, UserPrincipalName, AssignedLicenses, LicenseCount | Export-Csv $ReportDestinationFolderPath+'\UsersAssignedLicenses' + ((Get-Date).DateTime) '.csv'   
+    $Results | Select-Object DisplayName, UserPrincipalName, AssignedLicenses, LicenseCount | Export-Csv $ReportDestinationFolderPath'\UsersAssignedLicenses'$ExportDate'.csv'   
 }elseif ($ReportTypeSelection -eq 'LastSignInDetail') {
-    $Results | Select-Object DisplayName, UserPrincipalName, LastLogonTime, CreationTime, MailboxCreatiionTime, ModifiedObjectTime, LastPasswordChange | Export-Csv $ReportDestinationFolderPath+'\UserLastSignInDetail' + ((Get-Date).DateTime) '.csv'
+    $Results | Select-Object DisplayName, UserPrincipalName, LastLogonTime, CreationTime, MailboxCreatiionTime, ModifiedObjectTime, LastPasswordChange | Export-Csv $ReportDestinationFolderPath'\UserLastSignInDetail'$ExportDate'.csv'
 }elseif ($ReportTypeSelection -eq 'AdminRoles') {
-    $Results | Select-Object DisplayName, UserPrincipalName, AssignedRoles, RoleCount| Export-Csv $ReportDestinationFolderPath+'\UsersAssignedLicenses' + ((Get-Date).DateTime) '.csv'   
+    $Results | Select-Object DisplayName, UserPrincipalName, AssignedRoles, RoleCount| Export-Csv $ReportDestinationFolderPath'\UsersAssignedLicenses'$ExportDate'.csv'   
 }else{
-    $Results | Export-Csv $ReportDestinationFolderPath+'\UserLicenseInformationLastLogin' + ((Get-Date).DateTime) '.csv'
+    $Results | Export-Csv $ReportDestinationFolderPath'\UserLicenseInformationLastLogin'$ExportDate'.csv'
 }
