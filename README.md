@@ -24,7 +24,7 @@ Run powershell make sure you install both msonline and exchangeonlinemanagement 
 ### Example 1 : Only one mailbox type
     .\GetUserLicenseInformationLastLogin.ps1 -RecipientTypes UserMailbox
 
-### Example 1 : Only one mailbox type
+### Example 1 : More than one mailbox type
     .\GetUserLicenseInformationLastLogin.ps1 -RecipientTypes UserMailbox, SharedMailbox
 
 ### Example 1 : Getting multiple mailbox types different report type
